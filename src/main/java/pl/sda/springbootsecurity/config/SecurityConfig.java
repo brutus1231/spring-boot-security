@@ -31,7 +31,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .password("$2a$10$ML7cPKVnXbZNm/3xabPWYeG6uDG5WR6lpUa3efs6XY6N1783c3o2C").roles("USER")
                 .and()
                 .withUser("user2")
-                .password("$2a$10$ML7cPKVnXbZNm/3xabPWYeG6uDG5WR6lpUa3efs6XY6N1783c3o2C").roles("USER,MANAGER")
+                .password("$2a$10$ML7cPKVnXbZNm/3xabPWYeG6uDG5WR6lpUa3efs6XY6N1783c3o2C").roles("USER", "MANAGER")
                 .and()
                 .withUser("admin")
                 .password("$2a$10$ML7cPKVnXbZNm/3xabPWYeG6uDG5WR6lpUa3efs6XY6N1783c3o2C").roles("ADMIN");
