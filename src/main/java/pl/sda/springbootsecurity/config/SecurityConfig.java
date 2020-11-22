@@ -1,10 +1,13 @@
 package pl.sda.springbootsecurity.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -24,8 +27,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication()
-                .withUser("user").password("{noop}password").roles("USER")
+                .withUser("user")
+                .password("$2a$10$ML7cPKVnXbZNm/3xabPWYeG6uDG5WR6lpUa3efs6XY6N1783c3o2C").roles("USER")
                 .and()
-                .withUser("admin").password("{noop}password").roles("ADMIN");
+                .withUser("admin")
+                .password("$2a$10$ML7cPKVnXbZNm/3xabPWYeG6uDG5WR6lpUa3efs6XY6N1783c3o2C").roles("ADMIN");
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 }
